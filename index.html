@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocol Omega: Rescue Dr. Zap</title>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-deep: #050505;
+            --bg-panel: #111111;
+            --text-primary: #e0e0e0;
+            --text-dim: #888;
+            --accent-alert: #ff4757;  /* Red for danger */
+            --accent-data: #2ed573;   /* Green for data */
+            --accent-time: #1e90ff;   /* Blue for time */
+            --border: #333;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: 'Space Grotesk', sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+            background-image: radial-gradient(#1a1a1a 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(30, 144, 255, 0.3);
+        }
+
+        h2 {
+            border-left: 4px solid var(--accent-time);
+            padding-left: 15px;
+            margin-top: 50px;
+            color: #fff;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: #222;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--accent-data);
+            font-size: 0.9em;
+        }
+
+        /* Mission Briefing */
+        .briefing {
+            background: rgba(30, 144, 255, 0.05);
+            border: 1px solid var(--accent-time);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .briefing::before {
+            content: "INCOMING TRANSMISSION...";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--bg-deep);
+            padding: 0 10px;
+            color: var(--accent-time);
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        /* Glossary Section */
+        .glossary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .term-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .term-title {
+            color: var(--accent-data);
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* Day Cards */
+        .mission-log {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .mission-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+        }
+
+        .obj-box {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        /* Hint System */
+        details {
+            margin-top: 15px;
+            background: #1a1a1a;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        summary {
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            user-select: none;
+            transition: background 0.2s;
+        }
+
+        summary:hover {
+            background: #252525;
+            color: #fff;
+        }
+
+        .hint-content {
+            padding: 15px;
+            border-top: 1px solid #333;
+            color: #ccc;
+            font-size: 0.95rem;
+        }
+
+        .glitch-text {
+            animation: glitch 3s infinite;
+            color: var(--accent-alert);
+        }
+
+        @keyframes glitch {
+            0% { opacity: 1; }
+            50% { opacity: 1; }
+            52% { opacity: 0.5; }
+            54% { opacity: 1; }
+            100% { opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header style="text-align: center; margin-bottom: 50px;">
+        <i class="ph ph-brain" style="font-size: 4rem; color: var(--accent-time);"></i>
+        <h1>The Neural Chronicles</h1>
+        <div style="font-family: 'JetBrains Mono'; color: var(--text-dim);">
+            // PROTOCOL OMEGA // STATUS: CRITICAL
+        </div>
+    </header>
+
+    <div class="briefing">
+        <p><strong>To:</strong> Lead Recovery Specialist (You)</p>
+        <p><strong>From:</strong> Unknown </p>
+        <p>
+            Dr. Zap wore the experimental headset at 4:20 PM. Now, his consciousness is fragmented across the timeline. 
+            We are receiving raw data streams, but they are corrupted. You must write the Python scripts to clean the data, 
+            analyze the patterns, and lock onto his signal.
+        </p>
+        <p style="color: var(--accent-alert);">
+            <i class="ph ph-warning"></i> <strong>WARNING:</strong> Automatic coding assistants are offline. You must derive the logic yourself. You may search for syntax, not solutions!
+        </p>
+    </div>
+
+    <h3><i class="ph ph-book-bookmark"></i> New Recruit Glossary</h3>
+    <p style="color: #888; margin-bottom: 20px;">Review these terms before accessing the data streams.</p>
+    
+    <div class="glossary">
+        <div class="term-card">
+            <span class="term-title">Electrode / Channel</span>
+            <small>Think of these like microphones placed on the head. We have 4 microphones: 2 on the forehead (Frontal) and 2 on the back (Occipital).</small>
+        </div>
+        <div class="term-card">
+            <span class="term-title">Hz (Sampling Rate)</span>
+            <small>How fast we record data. "100 Hz" means we take 100 snapshots of the brain every single second.</small>
+        </div>
+        <div class="term-card">
+            <span class="term-title">Trial</span>
+            <small>One specific attempt at an experiment. If Dr. Zap tried to do math 10 times, we have 10 "Trials" of data</small>
+        </div>
+        <div class="term-card">
+            <span class="term-title">Array Shape</span>
+            <small>The structure of the data container. (10, 4) means 10 rows and 4 columns.</small>
+        </div>
+    </div>
+
+    <div class="mission-log">
+        <div class="mission-header">
+            <i class="ph ph-lightning-slash" style="font-size: 2rem; color: var(--accent-alert);"></i>
+            <div>
+                <h3 style="margin:0;">Day 1: The Mirror Glitch</h3>
+                <small style="color: var(--text-dim);">Target: <code>day1_electrodes.csv</code></small>
+            </div>
+        </div>
+
+        <p>The headset is acting up. The two electrodes on the front of the head (Fp1, Fp2) are reading normal timeline data. The two on the back (O1, O2) are reading data from a mirror (neurons) universe.</p>
+
+        <div class="obj-box">
+            <strong><i class="ph ph-crosshair"></i> Your Objectives:</strong>
+            <ol>
+                <li>Load the CSV file.</li>
+                <li>Slice the data into two separate groups: <strong>Frontal</strong> (the first 2 columns) and <strong>Occipital</strong> (the last 2 columns).</li>
+                <li>Calculate the average voltage for each group.</li>
+                <li><strong>Stability Check:</strong> Which group varies less? Calculate the Standard Deviation for both and print the name of the more stable region.</li>
+            </ol>
+        </div>
+
+        <details>
+            <summary><i class="ph ph-lightbulb"></i> Need a Logic Hint?</summary>
+            <div class="hint-content">
+                To separate the sensors, remember that computers (running Python) start counting at 0. <br>
+                - Frontal is index 0 up to (but not including) 2. Here comes some quirky things about Python <br>
+                - In Python slicing and ranges, the upper limit is exclusive, meaning the operation stops exactly one step before that index is reached.<br>
+                - Occipital is index 2 to the end.<br>
+                Look for a function in your library (like NumPy or Pandas) that calculates "mean" and "std" (standard deviation).
+            </div>
+        </details>
+    </div>
+
+    <div class="mission-log">
+        <div class="mission-header">
+            <i class="ph ph-wave-sine" style="font-size: 2rem; color: var(--accent-data);"></i>
+            <div>
+                <h3 style="margin:0;">Day 2: The Spectral Drift</h3>
+                <small style="color: var(--text-dim);">Target: <code>day2_frequency_power.csv</code></small>
+            </div>
+        </div>
+
+        <p>We've captured the strength of Dr. Zap's brainwaves across 5 distinct frequencies (Delta, Theta, Alpha, Beta, Gamma). However, the signal strength is erratic. We need to normalize it to make sense of the pattern.</p>
+
+        <div class="obj-box">
+            <strong><i class="ph ph-crosshair"></i> Your Objectives:</strong>
+            <ol>
+                <li>Isolate the <strong>Alpha</strong> wave column. We need to see if the back of the brain (Occipital) is reacting differently than the front (Frontal). Calculate the difference (Occipital Avg - Frontal Avg).</li>
+                <li><strong>Normalization:</strong> The raw numbers are too messy. For every single frequency band, convert the data to a "Z-score". We are going to see Z score for each electrode normalised across frequency bands.
+                <br><em>Formula: (Value - Mean) / Standard Deviation</em>.
+<br> Now, take an average across all channels. We need only the mean normalised power across each frequency band. You will be plotting this as a line graph later.</li>
+            </ol>
+        </div>
+
+        <details>
+            <summary><i class="ph ph-lightbulb"></i> Need a Logic Hint?</summary>
+            <div class="hint-content">
+                <strong>For Objective 1:</strong> You'll need to select specific rows and columns simultaneously. 
+                <br><br>
+                <strong>For Objective 2:</strong> The Z scored data would look like the input data csv. Except the fact that, the numbers would be replaced by Z scores!
+            </div>
+        </details>
+    </div>
+
+    <div class="mission-log">
+        <div class="mission-header">
+            <i class="ph ph-clock-counter-clockwise" style="font-size: 2rem; color: var(--accent-time);"></i>
+            <div>
+                <h3 style="margin:0;">Day 3: The Time Loop</h3>
+                <small style="color: var(--text-dim);">Target: <code>day3_trials.npy</code></small>
+            </div>
+        </div>
+
+        <p>We have a 3D block of data. Imagine a stack of 10 sheets of graph paper. <br>
+        <strong>Dimensions:</strong> (10 Trials) × (4 Channels) × (1000 Timepoints).</p>
+	First five trials represent the stable experimental baseline before the temporal anomaly occurred under various 	conditions - Rest, Math, Music, Meditation, Mischief. <br>
+        <p>Dr. Zap vanished during <strong>Trial #5</strong>. We need to pinpoint the exact millisecond.</p>
+
+        <div class="obj-box">
+            <strong><i class="ph ph-crosshair"></i> Your Objectives:</strong>
+            <ol>
+                <li>Load the .npy file.</li>
+                <li>Isolate <strong>Trial #5</strong>. (Remember, computers start counting at 0, so this is index 4).</li>
+                <li>Squash the 4 channels together (calculate the mean across the channels) so you are left with just one timeline of 1000 points.</li>
+                <li>Find the index (time) where the signal hit its <strong>highest peak</strong> (maximum value). Report the time in seconds (remember, one seconds = 100 samples).</li>
+                <li>Compare the average signal power (across bands, across electrodes) of the "Before" trials (0-4) vs the "After" trials (5-9). Did the brain activity drop after the incident?</li>
+            </ol>
+        </div>
+
+        <details>
+            <summary><i class="ph ph-lightbulb"></i> Need a Logic Hint?</summary>
+            <div class="hint-content">
+                To "squash" dimensions, you need to tell the computer which <code>axis</code> to crush. <br>
+                - Axis 0 is usually the Trials.<br>
+                - Axis 1 is the Channels.<br>
+                - Axis 2 is the Time.<br>
+                You may start with the 3D array and do an average across electrodes and time. Then, you can separate before and after trials and do one more round of averaging</em>.
+            </div>
+        </details>
+    </div>
+
+    <div class="mission-log">
+        <div class="mission-header">
+            <i class="ph ph-cube" style="font-size: 2rem; color: var(--accent-alert);"></i>
+            <div>
+                <h3 style="margin:0;">Day 4: Hyperdimensional Havoc</h3>
+                <small style="color: var(--text-dim);">Target: <code>day4_hyperdimensional.npy</code></small>
+            </div>
+        </div>
+
+        <p class="glitch-text">CRITICAL COMPLEXITY INCREASE.</p>
+        <p>The data is now 4-Dimensional. It's organized like a filing cabinet:</p>
+        <ul>
+            <li><strong>Cabinet:</strong> 10 Trials</li>
+            <li><strong>Drawers:</strong> 5 Conditions (Rest, Math, Music, Meditation, Mischief)</li>
+            <li><strong>Folders:</strong> 4 Channels</li>
+            <li><strong>Pages:</strong> 1000 Timepoints</li>
+        </ul>
+
+        <div class="obj-box">
+            <strong><i class="ph ph-crosshair"></i> Your Objectives:</strong>
+            <ol>
+                <li><strong>The Meditation Window:</strong> We need to focus on the <strong>Meditation</strong> condition (Index 3). Specifically, look at the <strong>Occipital</strong> channels (Last 2).</li>
+                <li>Collapse (average) the Trials and the Channels. You should be left with a single timeline.</li>
+                <li>Slice that timeline to look only at the window between <strong>400ms and 600ms</strong>. What is the average value there?</li>
+                <li><strong>Stability Ranking:</strong> Loop through all 5 conditions. For each one, calculate the "Signal Stability" (Mean divided by Standard Deviation). Print the name of the most stable condition.</li>
+            </ol>
+        </div>
+
+        <details>
+            <summary><i class="ph ph-lightbulb"></i> Need a Logic Hint?</summary>
+            <div class="hint-content">
+                This requires careful slicing. <br>
+                <code>data[:, 3, 2:, :]</code> <br>
+                Think about what each colon represents. <br>
+                - 1st colon: "All trials"<br>
+                - 3: "Only condition index 3"<br>
+                - 2: "From channel 2 to the end"<br>
+                - Last colon: "All timepoints"
+            </div>
+        </details>
+    </div>
+
+    <div class="mission-log">
+        <div class="mission-header">
+            <i class="ph ph-monitor-play" style="font-size: 2rem; color: var(--accent-time);"></i>
+            <div>
+                <h3 style="margin:0;">Day 5: The Visual Lock</h3>
+            </div>
+        </div>
+
+        <p>The numbers are crunching, but we need a visual lock to open the portal.</p>
+
+        <div class="obj-box">
+            <strong><i class="ph ph-paint-brush"></i> Your Objectives:</strong>
+            <ol>
+                <li>Create a "Dashboard" image (<code>neural_journey.png</code> of 600 dpi) with 4 subplots showing your findings from Days 1-4.</li>
+		<p class="glitch-text">a) Frontal vs Occipital bar plot b) Frequency-Normalised power line plot c) mean activity before and after d) Stability across conditions</p>
+                <li>Create a <strong>Heatmap</strong> for the Day 4 data.
+                    <ul>
+                        <li>Average the data down to just (Conditions x Channels).</li>
+                        <li>Plot this 5x4 grid.</li>
+                        <li>This map reveals which brain regions are most active during five conditions. Remember, only frontal activity was from Dr. Zap and occipital ones were from the mirror dimension. </li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 50px; color: var(--text-dim);">
+       Good luck, Specialist.</em></p>
+    </div>
+
+</div>
+
+</body>
+</html>
